@@ -6,14 +6,15 @@ import numpy as np
 class DropColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
+        self.data = pd.DataFrame()
 
     def fit(self, X, y=None):
         return self
 
     def transform(self, X):
         # Primero realizamos la cópia del DataFrame 'X' de entrada
-        data = X.copy()
-        datos = data.drop(data[data['EXISTING_SAVINGS']=='UNKNOWN'].index)
+        self.data = X.copy()
+        datos = self.data.drop(self.data[self.data['EXISTING_SAVINGS']=='UNKNOWN'].index)
         datos['CHECKING_BALANCE']= datos['CHECKING_BALANCE'].replace('NO_CHECKING','0')
         datos = datos.drop(datos[datos['EXISTING_SAVINGS']=='UNKNOWN'].index)
         INSTALLMENT_PLANS_CAT=pd.get_dummies(datos['INSTALLMENT_PLANS'])
