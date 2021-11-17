@@ -11,8 +11,8 @@ class DropColumns(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        # Primero realizamos la cópia del DataFrame 'X' de entrada
         data = pd.DataFrame()
+        data = X.copy()
         datos = data.drop(data[data['EXISTING_SAVINGS']=='UNKNOWN'].index)
         datos['CHECKING_BALANCE']= datos['CHECKING_BALANCE'].replace('NO_CHECKING','0')
         datos = datos.drop(datos[datos['EXISTING_SAVINGS']=='UNKNOWN'].index)
