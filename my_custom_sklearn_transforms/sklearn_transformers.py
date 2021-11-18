@@ -24,5 +24,40 @@ class DropColumns(BaseEstimator, TransformerMixin):
         data['CHECKING_BALANCE'] = pd.to_numeric(data['CHECKING_BALANCE'],errors = 'coerce')
         data['EXISTING_SAVINGS'] = pd.to_numeric(data['EXISTING_SAVINGS'],errors = 'coerce')
         data =pd.concat((data,OTHERS_ON_LOAN_CAT,LOAN_PURPOSE_CAT,INSTALLMENT_PLANS_CAT,SEX,PROPERTY_CAT,HOUSING_CAT,CREDIT_HISTORY_CAT), axis=1)
-        data=data.drop(['CREDIT_HISTORY','PROPERTY','HOUSING','SEX','INSTALLMENT_PLANS','LOAN_PURPOSE','OTHERS_ON_LOAN','CREDIT_HISTORY','NONE'], axis=1)
+        try:
+            data=data.drop(['CREDIT_HISTORY'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['PROPERTY'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['HOUSING'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['SEX'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['INSTALLMENT_PLANS'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['LOAN_PURPOSE'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['OTHERS_ON_LOAN'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['CREDIT_HISTORY'], axis=1)
+        except:
+            pass
+        try:
+            data=data.drop(['NONE'], axis=1)
+        except:
+            pass
         return data.dropna()
