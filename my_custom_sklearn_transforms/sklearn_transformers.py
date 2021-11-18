@@ -12,9 +12,6 @@ class DropColumns(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         data = X.copy()
-        data = data.drop(data[data['EXISTING_SAVINGS']=='UNKNOWN'].index)
-        data['CHECKING_BALANCE']= data['CHECKING_BALANCE'].replace('NO_CHECKING','0')
-        data = data.drop(data[data['EXISTING_SAVINGS']=='UNKNOWN'].index)
         INSTALLMENT_PLANS_CAT=pd.get_dummies(data['INSTALLMENT_PLANS'])
         LOAN_PURPOSE_CAT=pd.get_dummies(data['LOAN_PURPOSE'])
         OTHERS_ON_LOAN_CAT=pd.get_dummies(data['OTHERS_ON_LOAN'])
